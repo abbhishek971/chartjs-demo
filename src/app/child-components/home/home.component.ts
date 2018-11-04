@@ -11,6 +11,7 @@ import * as _ from 'lodash';
 })
 export class HomeComponent implements OnInit {
   data:Array<any> = [];
+  pages:Array<any> = [];
   mostRated:Array<any> = [];
   mostWatched:Array<any> = [];
   mostLiked:Array<any> = [];
@@ -37,11 +38,18 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.displayType = 'grid';
+    this.displayType = 'list';
     this._dataService.getData()
     .subscribe((data) => {
       this.data = data;
       this.totalItems = data.length;
+
+      // creating pages for pagination
+      for (let i = 0; i <= this.data.length/this.pageSize; i++) {
+        this.pages.push(this.data.slice(i*this.pageSize, (this.pageSize*(i+1))>this.totalItems?this.totalItems:(this.pageSize+i)));
+      }
+      console.log(this.pages);
+
     });
     this.filterTrendingData();
   }
@@ -69,5 +77,9 @@ export class HomeComponent implements OnInit {
   openModal(template: TemplateRef<any>, movie: any) {
     this.selectedMovie = movie;
     this.modalRef = this.modalService.show(template);
+  }
+
+  pageChanged(event: any) {
+    this.currentPage = event.page;
   }
 }

@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-12 row" style="margin-bottom: 1rem;">
       <div class="col-10 text-center">
-        <pagination [totalItems]="totalItems" [(ngModel)]="currentPage" [maxSize]="maxSize" [itemsPerPage]="12">
+        <pagination [totalItems]="totalItems" [(ngModel)]="currentPage" [maxSize]="maxSize" [itemsPerPage]="pageSize" (pageChanged)="pageChanged($event)">
         </pagination>
       </div>
       <div class="col-2">
@@ -22,7 +22,7 @@
   </div>
   <div class="col-9">
       <div *ngIf="displayType=='grid'" class="row">
-          <div *ngFor="let movie of data;" class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+          <div *ngFor="let movie of pages[currentPage-1];" class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
               <div class="card" (click)="openModal(template, movie)">
                   <img class="card-img-top" src="{{movie.poster}}" alt="Card image cap">
                   <div class="card-body">
@@ -34,7 +34,7 @@
         <div *ngIf="displayType=='list'" class="row">
           <table class="table" style="max-width: 100%">
             <tbody>
-              <tr *ngFor="let movie of data;" class="movie-card">
+              <tr *ngFor="let movie of pages[currentPage-1];" class="movie-card">
                 <td width="15%"><img src="{{movie.poster}}" alt="poster" class="list-poster-thumbnail"></td>
                 <td width="60%">
                     <span class="movie-title">{{movie.name}}</span>
@@ -50,22 +50,7 @@
           </table>
         </div>
   </div>
-  <div class="col-3">
-    <!-- <div class="row dropdown-container">
-        <div class="btn-group" dropdown>
-            <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
-                    aria-controls="dropdown-basic">
-              <span *ngIf="displayType=='grid'"><i class="fa fa-th"></i></span>
-              <span *ngIf="displayType=='list'"><i class="fa fa-list"></i></span>
-              <span class="caret"></span>
-            </button>
-            <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
-                role="menu" aria-labelledby="button-basic">
-              <li role="menuitem"><a class="dropdown-item" (click)="displayType='grid'"><i class="fa fa-th"></i> Grid View</a></li>
-              <li role="menuitem"><a class="dropdown-item" (click)="displayType='list'"><i class="fa fa-list"></i> List View</a></li>
-            </ul>
-        </div>
-    </div> -->
+  <div class="col-3" style="padding-left: 30px;">
     <div class="row">
         <div class="col-12 data-list-title">
             <h5>Highest Rated</h5>
