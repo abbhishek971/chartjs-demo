@@ -15,6 +15,12 @@ export class HomeComponent implements OnInit {
   mostWatched:Array<any> = [];
   mostLiked:Array<any> = [];
 
+  // identifiers for pagination
+  maxSize = 5;
+  pageSize = 12;
+  totalItems = 0;
+  currentPage = 1;
+
   displayType:string;
   modalRef: BsModalRef;
   selectedMovie:any = {
@@ -35,6 +41,7 @@ export class HomeComponent implements OnInit {
     this._dataService.getData()
     .subscribe((data) => {
       this.data = data;
+      this.totalItems = data.length;
     });
     this.filterTrendingData();
   }
