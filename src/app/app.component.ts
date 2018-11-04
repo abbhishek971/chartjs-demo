@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { DataService } from './app.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,21 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'recosense-project';
+  data: Array<any> = [];
+  displayType: string;
+
+  constructor(
+    private _dataService: DataService
+  ) { }
+  ngOnInit(){
+    this.displayType = 'grid';
+    this.getData();
+  }
+
+  getData() {
+    this._dataService.getData()
+    .subscribe(data => {
+      this.data = data;
+    });
+  }
 }

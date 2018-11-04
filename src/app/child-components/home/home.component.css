@@ -1,0 +1,40 @@
+.card-body{
+  padding: 0.25rem;
+}
+
+.btn-display-toggle{
+  float: right;
+}
+
+.dropdown-container{
+  display: block;
+  text-align: right;
+}
+
+.list-poster-thumbnail{
+  max-height: 150px;
+  width: auto;
+  border-radius: 8px;
+}
+
+.movie-title{
+  font-weight: bolder;
+  font-size: 2rem;
+}
+
+.movie-card{
+  border: none;
+  display: block;
+  margin-top: 3px;
+  margin-bottom: 3px;
+  border: 1px solid #80808066;
+  border-radius: 8px;
+}
+
+.movie-card:hover{
+  background-color: #e6e2e246;
+  cursor: pointer;
+  -webkit-box-shadow: 4px 6px 5px 0px rgba(115,114,115,1);
+  -moz-box-shadow: 4px 6px 5px 0px rgba(115,114,115,1);
+  box-shadow: 4px 6px 5px 0px rgba(115,114,115,1);
+}
