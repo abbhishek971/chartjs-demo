@@ -1,3 +1,23 @@
-<p>
-  analytics works!
-</p>
+<div class="row">
+  <div class="btn-group" dropdown>
+      <button type="button" class="btn btn-success">{{selectedCategory}}</button>
+      <button id="button-split" type="button" dropdownToggle class="btn btn-success dropdown-toggle dropdown-toggle-split"
+        aria-controls="dropdown-split">
+        <span class="caret"></span>
+        <span class="sr-only">Split button!</span>
+      </button>
+      <ul id="dropdown-split" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-split">
+        <li role="menuitem" (click)="selectCategory('All')"><a class="dropdown-item">Both: Movies &amp; TV Series</a></li>
+        <li role="menuitem" (click)="selectCategory('Movies')"><a class="dropdown-item">Movies Only</a></li>
+        <li role="menuitem" (click)="selectCategory('TV Series')"><a class="dropdown-item">TV Series Only</a></li>
+      </ul>
+    </div>
+</div>
+<div>
+    <div>
+      <canvas #myCanvas1>{{ chart1 }}</canvas>
+    </div>
+    <div class="chart-container">
+      <canvas #myCanvas2>{{ chart2 }}</canvas>
+    </div>
+</div>

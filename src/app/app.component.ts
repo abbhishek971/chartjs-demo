@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from "@angular/router";
 import { DataService } from './app.service';
 
 @Component({
@@ -7,21 +8,9 @@ import { DataService } from './app.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  data: Array<any> = [];
-  displayType: string;
-
   constructor(
-    private _dataService: DataService
+    private _router:Router
   ) { }
   ngOnInit(){
-    this.displayType = 'grid';
-    this.getData();
-  }
-
-  getData() {
-    this._dataService.getData()
-    .subscribe(data => {
-      this.data = data;
-    });
   }
 }

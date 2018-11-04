@@ -1,13 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from "@angular/forms";
 
-import { AnalyticsComponent } from './Analytics.component';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { AnalyticsComponent } from './analytics.component';
 import { AnalyticsRoutingModule } from './analytics.routing-module';
 
 @NgModule({
   imports: [
     CommonModule,
-    AnalyticsRoutingModule
+    FormsModule,
+    AnalyticsRoutingModule,
+    BsDropdownModule.forRoot()
   ],
   declarations: [AnalyticsComponent]
 })

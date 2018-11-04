@@ -1,11 +1,26 @@
 <div class="row">
+  <div class="col-12 text-right" style="margin-bottom: 1rem;">
+      <div class="row dropdown-container">
+        <div class="btn-group" dropdown>
+          <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle" aria-controls="dropdown-basic">
+            <span *ngIf="displayType=='grid'"><i class="fa fa-th"></i></span>
+            <span *ngIf="displayType=='list'"><i class="fa fa-list"></i></span>
+            <span class="caret"></span>
+          </button>
+          <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+            <li role="menuitem"><a class="dropdown-item" (click)="displayType='grid'"><i class="fa fa-th"></i> Grid View</a></li>
+            <li role="menuitem"><a class="dropdown-item" (click)="displayType='list'"><i class="fa fa-list"></i> List View</a></li>
+          </ul>
+        </div>
+      </div>
+  </div>
   <div class="col-9">
       <div *ngIf="displayType=='grid'" class="row">
           <div *ngFor="let movie of data;" class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-              <div class="card">
+              <div class="card" (click)="openModal(template, movie)">
                   <img class="card-img-top" src="{{movie.poster}}" alt="Card image cap">
                   <div class="card-body">
-                    <p class="card-text">{{movie.synopsis}}</p>
+                    <p class="card-text">{{movie.name}}</p>
                   </div>
               </div>
           </div>
@@ -30,7 +45,7 @@
         </div>
   </div>
   <div class="col-3">
-    <div class="row dropdown-container">
+    <!-- <div class="row dropdown-container">
         <div class="btn-group" dropdown>
             <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
                     aria-controls="dropdown-basic">
@@ -44,9 +59,61 @@
               <li role="menuitem"><a class="dropdown-item" (click)="displayType='list'"><i class="fa fa-list"></i> List View</a></li>
             </ul>
         </div>
-    </div>
+    </div> -->
     <div class="row">
-
+        <div class="col-12 data-list-title">
+            <h5>Highest Rated</h5>
+          </div>
+          <div class="col-12 data-list text-left">
+            <ol>
+              <li *ngFor="let movie of mostRated;" (click)="openModal(template, movie)">
+                {{movie.name}}
+                <br><small><i class="fa fa-eye"></i> {{movie.ratings}}</small>
+              </li>
+            </ol>
+          </div>
+      <div class="col-12 data-list-title">
+        <h5>Most Watched</h5>
+      </div>
+      <div class="col-12 data-list text-left">
+        <ol>
+          <li *ngFor="let movie of mostWatched;" (click)="openModal(template, movie)">
+            {{movie.name}}
+            <br><small><i class="fa fa-eye"></i> {{movie.views | number}}</small>
+          </li>
+        </ol>
+      </div>
+      <div class="col-12 data-list-title">
+          <h5>Most Liked</h5>
+        </div>
+        <div class="col-12 data-list text-left">
+          <ol>
+            <li *ngFor="let movie of mostLiked;" (click)="openModal(template, movie)">
+              {{movie.name}}
+              <br><small><i class="fa fa-heart"></i> {{movie.likes | number}}</small>
+            </li>
+          </ol>
+        </div>
     </div>
   </div>
 </div>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">{{selectedMovie.name}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="poster-container">
+        <img src="{{selectedMovie.poster}}" alt="poster" class="modal-poster">
+        <div class="row poster-overlay">
+          <div class="col-4"><i class="fa fa-heart"></i> {{selectedMovie.likes}}</div>
+          <div class="col-4"><i class="fa fa-eye"></i> {{selectedMovie.views}}</div>
+          <div class="col-4"><i class="fa fa-bookmark"></i> {{selectedMovie.category}}</div>
+        </div>
+    </div>
+    {{selectedMovie.synopsis}}
+  </div>
+</ng-template>
